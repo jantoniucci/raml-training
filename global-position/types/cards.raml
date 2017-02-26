@@ -1,0 +1,8 @@
+#%RAML 1.0 DataType
+properties:
+  id: string
+  card_number: string
+  holder: string
+  card_type:
+    enum: [credit_card, debit_card, prepaid_card]
+    type: string

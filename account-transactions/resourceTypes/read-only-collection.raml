@@ -1,0 +1,31 @@
+#%RAML 1.0 ResourceType
+get:
+  responses:
+    200:
+      headers:
+        Content-Location:
+      body:
+        application/json:
+          type: <<resourceType>>[]
+
+    204:
+      description: No Content
+
+    206:
+      description: Partial content
+      headers:
+        Content-Location:
+      body:
+        application/json:
+
+    400:
+      description: Bad Request
+
+    401:
+      description: Unauthorized
+
+    403:
+      description: Forbidden
+
+    500:
+      description: Server Error

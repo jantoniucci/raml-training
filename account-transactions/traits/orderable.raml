@@ -1,0 +1,12 @@
+#%RAML 1.0 Trait
+queryParameters:
+  orderBy:
+    description: "Order by selected fields: <<fieldsList>> of the <<resourcePathName | !singularize>>"
+    type: string
+    required: false
+    default: <<defaultField>>
+  order:
+    description: Ascending or descending order.
+    enum: [desc, asc]
+    default: desc
+    required: false

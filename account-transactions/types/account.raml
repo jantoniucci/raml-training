@@ -1,0 +1,13 @@
+#%RAML 1.0 Library
+types:
+  account:
+    type: object
+    properties:
+      id: string
+      account_number: string
+      alias: string
+      account_balance: string
+      alerts: string
+      status:
+        type: string
+        enum: [ "active", "blocked-by-legal", "inactive" ]

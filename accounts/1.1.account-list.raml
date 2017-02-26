@@ -1,0 +1,48 @@
+#%RAML 1.0
+title: Account
+description: This is an API functional domain for accounts
+version: v1
+baseUri: http://api.open-api-training.com/accounts-v1
+protocols: [  HTTPS ]
+mediaType: [ application/json ]
+types:
+  Account:
+    properties:
+      id: string
+      account_number: string
+      alias: string
+      account_balance: string
+      alerts: string
+      status:
+        type: string
+        enum: [ "active", "blocked-by-legal", "inactive" ]
+
+/accounts:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: [Account]
+
+      204:
+        description: No Content
+
+      206:
+        description: Partial content
+        headers:
+          Content-Location:
+        body:
+          application/json:
+
+      400:
+        description: Bad Request
+
+      401:
+        description: Unauthorized
+
+      403:
+        description: Forbidden
+
+      500:
+        description: Server Error

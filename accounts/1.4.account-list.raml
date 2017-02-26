@@ -1,0 +1,24 @@
+#%RAML 1.0
+title: Account
+description: This is an API functional domain for accounts
+version: v1
+baseUri: http://api.open-api-training.com/accounts-v1
+protocols: [  HTTPS ]
+mediaType: [ application/json ]
+
+uses:
+  Account: types/account.raml
+
+traits:
+  sortable: !include traits/orderable.raml
+  pageable: !include traits/pageable.raml
+
+resourceTypes:
+  read-only-collection: !include resourceTypes/read-only-collection.raml
+
+/accounts:
+  type:
+      read-only-collection:
+        resourceType: Account.account
+  get:
+    is: [sortable: {fieldsList : "account_number, alias, account_balance", defaultField : "alias"}, pageable]

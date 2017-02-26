@@ -21,4 +21,6 @@ resourceTypes:
       read-only-collection:
         resourceType: Account.account
   get:
-    is: [sortable: {fieldsList : "account_number, alias, account_balance", defaultField : "alias"}, pageable]
+    is: [ sortable: { fieldsList : "account_number, alias, account_balance", defaultField : "alias"},
+          pageable
+        ]

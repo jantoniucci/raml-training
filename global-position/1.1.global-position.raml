@@ -1,0 +1,69 @@
+#%RAML 1.0
+title: Global Position
+description: This is an API functional domain for global position
+version: v1
+baseUri: http://api.open-api-training.com/global-position-v1
+protocols: [  HTTPS ]
+mediaType: [ application/json ]
+types:
+  Account:
+    properties:
+      id: string
+      account_number: string
+      alias: string
+      account_balance: string
+      alerts: string
+      status:
+        type: string
+        enum: [ "active", "blocked-by-legal", "inactive" ]
+  Cards:
+    properties:
+      id: string
+      card_number: string
+      holder: string
+      card_type:
+        enum: [credit_card, debit_card, prepaid_card]
+        type: string
+  Products:
+    type: array
+    items:
+      properties:
+        group_name: string
+        products: Cards[] | Account[]
+        group_balance: number
+
+/products:
+  get:
+    queryParameters:
+      group :
+        enum: ["CARDS", "ACCOUNTS"]
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              data:
+                type: Products
+
+      204:
+        description: No Content
+
+      206:
+        description: Partial content
+        headers:
+          Content-Location:
+        body:
+          application/json:
+
+      400:
+        description: Bad Request
+
+      401:
+        description: Unauthorized
+
+      403:
+        description: Forbidden
+
+      500:
+        description: Server Error

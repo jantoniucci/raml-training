@@ -1,0 +1,47 @@
+#%RAML 1.0
+title: Account
+description: This is an API functional domain for accounts
+version: v1
+baseUri: http://api.open-api-training.com/accounts-v1
+protocols: [  HTTPS ]
+mediaType: [ application/json ]
+types:
+  Account: !include types/account.raml
+  Cards: !include types/cards.raml
+  Products: !include types/products.raml
+
+/products:
+  get:
+    queryParameters:
+      group :
+        enum: ["CARDS", "ACCOUNTS"]
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              data:
+                type: Products
+
+      204:
+        description: No Content
+
+      206:
+        description: Partial content
+        headers:
+          Content-Location:
+        body:
+          application/json:
+
+      400:
+        description: Bad Request
+
+      401:
+        description: Unauthorized
+
+      403:
+        description: Forbidden
+
+      500:
+        description: Server Error

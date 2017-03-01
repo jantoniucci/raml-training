@@ -1,0 +1,40 @@
+#%RAML 1.0
+title: Login
+description: This is an API functional domain for login
+version: v1
+baseUri: http://api.open-api-training.com/login-v1
+protocols: [  HTTPS ]
+mediaType: [ application/json ]
+
+types:
+  login: !include types/login.raml
+  access_token: !include types/access_token.raml
+
+/login:
+  post:
+    body:
+      application/json:
+        type: login
+    responses:
+      200:
+        headers:
+          access_token: access_token
+        body:
+          application/json:
+            type: login
+            description: In this case, password will be returned as asterisks
+            example:
+              username: Johndoe
+              password: "*******"
+
+      400:
+        description: Bad Request
+
+      401:
+        description: Unauthorized
+
+      403:
+        description: Forbidden
+
+      500:
+        description: Server Error

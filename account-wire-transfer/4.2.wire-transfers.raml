@@ -1,0 +1,83 @@
+#%RAML 1.0
+title: WireTransfer
+description: This is an API functional domain for wire transfers
+version: v1
+baseUri: http://api.open-api-training.com/
+protocols: [  HTTPS ]
+mediaType: [ application/json ]
+
+types:
+
+  WireTransfer:
+    type: object
+    properties:
+      account_iban_origin: string
+      account_iban_target: string
+      amount: number
+      signs: WireTransferSign[]
+      current_status:
+        enum: [ MORE_SIGNS_PENDING, IN_PROGRESS, EXECUTED, CANCELED ]
+
+  WireTransferSign:
+    type: object
+    properties:
+      customer_id: string
+      hotp: string
+      motp: string
+
+/wire-transfers:
+  get:
+    responses:
+      200:
+        headers:
+          Content-Location:
+        body:
+          application/json:
+            type: WireTransfer[]
+
+      400:
+        description: Bad Request
+
+      401:
+        description: Unauthorized
+
+      500:
+        description: Server Error
+
+  post:
+    body:
+      application/json:
+        type: WireTransfer
+    responses:
+      201:
+        body:
+          application/json:
+            type: WireTransfer
+
+      400:
+        description: Bad Request
+
+      401:
+        description: Unauthorized
+
+      500:
+        description: Server Error
+
+  put:
+    body:
+      application/json:
+        type: WireTransfer
+    responses:
+      200:
+        body:
+          application/json:
+            type: WireTransfer
+
+      400:
+        description: Bad Request
+
+      401:
+        description: Unauthorized
+
+      500:
+        description: Server Error

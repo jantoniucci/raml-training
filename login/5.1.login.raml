@@ -12,8 +12,7 @@ types:
     type: object
     properties:
       username: string
-      password: string
-      access_token: string
+      avatar_url: string
       personal_info: PersonalInfo
 
   PersonalInfo:
@@ -27,6 +26,10 @@ types:
   MySession:
     type: object
     properties:
+      _id: string
+      username: string
+      password: string
+      access_token: string
       access_type: string
       access_type_details: string
       location_ip: string
@@ -51,24 +54,6 @@ types:
 
       500:
         description: Server Error
-  post:
-    body:
-      application/json:
-        type: MyAccount
-    responses:
-      201:
-        body:
-          application/json:
-            type: MyAccount
-
-      400:
-        description: Bad Request
-
-      401:
-        description: Unauthorized
-
-      500:
-        description: Server Error
 
   /sessions:
     get:
@@ -79,6 +64,24 @@ types:
           body:
             application/json:
               type: MySession[]
+
+        400:
+          description: Bad Request
+
+        401:
+          description: Unauthorized
+
+        500:
+          description: Server Error
+    post:
+      body:
+        application/json:
+          type: MySession
+      responses:
+        201:
+          body:
+            application/json:
+              type: MySession
 
         400:
           description: Bad Request

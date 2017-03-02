@@ -1,11 +1,11 @@
 #%RAML 1.0 Trait
 queryParameters:
   pageSize:
-    description: Number of elements per page
+    description: Number of elements per page. This number could be negative to indicate previous pages or new results.
     type: integer
     required: false
     example: 20
-  paginationKey:
+  paginationKey?:
     description: Key to obtain a single page
     type: string
     required: false
